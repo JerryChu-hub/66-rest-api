@@ -99,11 +99,11 @@ def search():
 @app.route("/search_id")
 def search_id():
     result = db.session.execute(db.select(Cafe).where(Cafe.id == request.args.get("id")))
-    cafe = result.scalars().all()
-    if not cafe:
+    all_cafes = result.scalars().all()
+    if not all_cafes:
         return jsonify(error={"Not Found": "Sorry, we don't have any cafes at the moment."}), 404
     else:
-        return jsonify(cafes = [cafe.to_dict()])
+        return jsonify(cafes = [cafe.to_dict() for cafe in all_cafes])
     
 # HTTP POST - Create Record
 @app.route("/add", methods=["POST"])
