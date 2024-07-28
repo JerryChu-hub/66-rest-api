@@ -49,10 +49,6 @@ class Cafe(db.Model):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
-# with app.app_context():
-#     db.create_all()
-
-
 @app.route("/")
 def home():
     return render_template("index.html")
